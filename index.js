@@ -3,7 +3,7 @@ const { startStandaloneServer } = require('@apollo/server/standalone')
 
 const { v1: uuid } = require('uuid')
 
-let persons = [
+let dogs = [
   {
   
     id: "3d594650-3436-11e9-bc57-8b80ba54c431",
@@ -43,7 +43,7 @@ type Address {
     description: String
     imageURL: String!
     likes: String!
-    location: Address!
+    address: Address!
    
   }
 
@@ -52,31 +52,35 @@ type Address {
     allDogs: [Dog!]!
     findDog(name: String!): Dog
   }
+
+  
   type Mutation {
     addDog(
       name: String!
       description: String
       imageURL: String!
       likes: String!
-      location: Address!
+      street: String!
+      city: String!
     ): Dog
   }
 `
 
 const resolvers = {
-  Dog: {
-    address: (root) => {
-      return { 
-        street: root.street,
-        city: root.city
-      }
-    }
-  },
+ 
   Query: {
     dogCount: () => dogs.length,
     allDogs: () => dogs,
     findDog: (root, args) =>
-      dogs.find(p => p.name === args.name)
+      dogs.find(d => d.name === args.name)
+  },
+  Dog: {
+    address: ({street,city}) => {
+      return {
+        street,
+        city,
+      }
+    }
   },
   Mutation: {
     addDog: (root, args) => {

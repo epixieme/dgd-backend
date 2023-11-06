@@ -84,6 +84,14 @@ const resolvers = {
   },
   Mutation: {
     addDog: (root, args) => {
+      if (dogs.find(d => d.name === args.name)) {
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name
+          }
+        })
+      }
       const dog = { ...args, id: uuid() }
       dogs = dogs.concat(dog)
       return dog

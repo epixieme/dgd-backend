@@ -33,17 +33,13 @@ let dogs = [
 ]
 
 const typeDefs = `
-type Address {
-  street: String!
-  city: String! 
-}
+
   type Dog {
     id: ID!
     name: String!
-    description: String
-    imageURL: String!
+    description: String!
+    imageUrl: String!
     likes: String!
-    address: Address!
    
   }
 
@@ -58,10 +54,8 @@ type Address {
     addDog(
       name: String!
       description: String
-      imageURL: String!
+      imageUrl: String!
       likes: String!
-      street: String!
-      city: String!
     ): Dog
   }
 `
@@ -74,14 +68,9 @@ const resolvers = {
     findDog: (root, args) =>
       dogs.find(d => d.name === args.name)
   },
-  Dog: {
-    address: ({street,city}) => {
-      return {
-        street,
-        city,
-      }
-    }
-  },
+  // Dog: {
+  //   description:string
+  // },
   Mutation: {
     addDog: (root, args) => {
       if (dogs.find(d => d.name === args.name)) {

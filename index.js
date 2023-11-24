@@ -11,6 +11,8 @@ let dogs = [
     description: "Large dog, very friendly and ready to meet other large breeds",
     imageUrl: "https://i.ibb.co/tzWGk3j/husky.jpg",
     likes: "Juicy Bones",
+    street:"3 the view",
+    city:"London"
   },
   {
 
@@ -19,6 +21,8 @@ let dogs = [
     description: "Large dog, very friendly and ready to meet other large breeds",
     imageUrl: "https://i.ibb.co/tzWGk3j/husky.jpg",
     likes: "Juicy Bones",
+    street:"3 the view",
+    city:"London"
   },
 
   {
@@ -28,6 +32,8 @@ let dogs = [
     description: "Large dog, very friendly and ready to meet other large breeds",
     imageUrl: "https://i.ibb.co/tzWGk3j/husky.jpg",
     likes: "Juicy Bones",
+    street:"3 the view",
+    city:"London"
   },
 
 ]
@@ -111,7 +117,7 @@ const resolvers = {
 
     },
     editStreet: (root, args) => {
-      const person = dogs.find(d => d.name === args.name)
+      const dog = dogs.find(d => d.name === args.name)
       if (!dog) {
         return null
       }

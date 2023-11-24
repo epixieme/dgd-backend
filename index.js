@@ -59,7 +59,6 @@ type Address {
     findDog(name: String!): Dog
   }
 
-  
   type Mutation {
     addDog(
       name: String!
@@ -109,7 +108,19 @@ const resolvers = {
       const dog = { ...args, id: uuid() }
       dogs = dogs.concat(dog)
       return dog
-    }
+
+    },
+    editStreet: (root, args) => {
+      const person = dogs.find(d => d.name === args.name)
+      if (!dog) {
+        return null
+      }
+  
+      const updatedPerson = { ...dog, street: args.street }
+      dogs = dogs.map(d => d.name === args.name ? updatedDog : d)
+      return updatedPerson
+    }   
+    
   }
 }
 
